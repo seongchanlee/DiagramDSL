@@ -25,3 +25,7 @@ hs_err_pid*
 /out
 /.idea
 /example
+
+#vscode
+.classpath
+.settings
