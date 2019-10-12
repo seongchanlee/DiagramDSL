@@ -4,8 +4,8 @@ import ast.Type.TYPE;
 import libs.Node;
 
 public class PARAMETER extends Node {
-    String parameterName;
-    TYPE parameterType;
+    private String parameterName;
+    private TYPE parameterType;
 
     @Override
     public void parse() {

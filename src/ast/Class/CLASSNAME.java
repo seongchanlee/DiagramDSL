@@ -1,7 +1,7 @@
 package ast.Class;
 
 public class CLASSNAME extends CLASSDEC {
-    String className;
+    private String className;
 
     @Override
     public void parse() {
