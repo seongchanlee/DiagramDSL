@@ -1,6 +1,6 @@
-package ast.Method;
+package ast;
 
-public class RETURN extends METHODDEC {
+public class CLASSTYPE extends STATEMENT {
     @Override
     public void parse() {
 
