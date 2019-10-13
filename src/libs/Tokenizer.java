@@ -35,9 +35,10 @@ public class Tokenizer {
         return theTokenizer;
     }
 
-    private void tokenize (){
+    private void tokenize() {
         String tokenizedProgram = program;
         tokenizedProgram = tokenizedProgram.replace("\n","");
+        tokenizedProgram = tokenizedProgram.replace("\t","");
         tokenizedProgram = tokenizedProgram.replaceAll("([0-9]+)","_$1_");
         System.out.println(program);
 
@@ -48,10 +49,9 @@ public class Tokenizer {
         tokenizedProgram = tokenizedProgram.replaceAll("[ ]+","");
         System.out.println("tokenizedprogram");
         System.out.println(tokenizedProgram);
-        String [] temparray=tokenizedProgram.split("[_]+");
-        tokens = new String[temparray.length-1];
+        String[] temparray = tokenizedProgram.split("[_]+");
 
-        System.arraycopy(temparray,1,tokens,0,temparray.length-1);
+        tokens = Arrays.copyOfRange(temparray, 1, temparray.length-1);
         System.out.println("tokens");
         System.out.println(Arrays.asList(tokens));
     }

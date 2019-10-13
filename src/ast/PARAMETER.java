@@ -1,15 +1,11 @@
-package ast.Method;
+package ast;
 
-import ast.Type.TYPE;
-import libs.Node;
-
-public class PARAMETER extends Node {
+public class PARAMETER extends STATEMENT {
     private String parameterName;
-    private TYPE parameterType;
 
     @Override
     public void parse() {
-
+        parameterName = tokenizer.getNext();
     }
 
     @Override
