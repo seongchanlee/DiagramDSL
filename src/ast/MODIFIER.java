@@ -10,6 +10,16 @@ public class MODIFIER extends STATEMENT {
 
     @Override
     public String evaluate() {
-        return null;
+        if(modifier.equals("public")){
+            return "+";
+        }
+        if(modifier.equals("private")){
+            return "-";
+        }
+        if(modifier.equals("protected")){
+            return "#";
+        }
+        // default is public modifier
+        return "+";
     }
 }

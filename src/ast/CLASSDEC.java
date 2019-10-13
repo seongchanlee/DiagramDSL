@@ -1,4 +1,5 @@
 package ast;
+import libs.SymbolTable;
 
 public class CLASSDEC extends STATEMENT {
     private String className;
@@ -37,10 +38,9 @@ public class CLASSDEC extends STATEMENT {
 
     @Override
     public String evaluate() {
+        SymbolTable.values.put(className, "");
+        SymbolTable.types.put(className, classType);
+        SymbolTable.relations.put(className, relation);
         return null;
-    }
-
-    public String getClassType() {
-        return classType;
     }
 }

@@ -6,7 +6,7 @@ import java.util.List;
 public class METHODDEC extends STATEMENT {
     private String methodName;
     private String methodType;
-    private String modifier;
+    private MODIFIER modifier;
     private List<PARAMETER> parameters = new ArrayList<>();
 
     @Override
@@ -37,6 +37,27 @@ public class METHODDEC extends STATEMENT {
 
     @Override
     public String evaluate() {
-        return null;
+        String method = "";
+        String modifierString = modifier.evaluate();
+        String type = methodType.equals("regular") ? "" : methodType;
+        method += modifierString + " " + type + " " + methodName;
+        if(parameters.isEmpty())
+        {
+            method += "()";
+        }
+        else
+        {
+            int count = 0;
+            method += "(";
+            for(PARAMETER p: parameters)
+            {
+                if(count != 0){ method += ", "; }
+                method += p.evaluate();
+                count++;
+            }
+            method += ")";
+        }
+        System.out.println(method);
+        return method;
     }
 }

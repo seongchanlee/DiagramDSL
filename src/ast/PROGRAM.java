@@ -19,6 +19,9 @@ public class PROGRAM extends Node {
 
     @Override
     public String evaluate() {
+        for(STATEMENT s: statements){
+            s.evaluate();
+        }
         return null;
     }
 }

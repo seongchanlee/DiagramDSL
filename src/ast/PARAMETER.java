@@ -9,7 +9,5 @@ public class PARAMETER extends STATEMENT {
     }
 
     @Override
-    public String evaluate() {
-        return null;
-    }
+    public String evaluate() { return parameterName; }
 }
