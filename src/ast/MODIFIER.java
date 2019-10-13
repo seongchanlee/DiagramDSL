@@ -19,7 +19,7 @@ public class MODIFIER extends STATEMENT {
         if(modifier.equals("protected")){
             return "#";
         }
-        // default is public modifier
+        // use public modifier as the default value
         return "+";
     }
 }

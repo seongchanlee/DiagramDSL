@@ -38,6 +38,7 @@ public class CLASSDEC extends STATEMENT {
 
     @Override
     public String evaluate() {
+        SymbolTable.currentClass = className;
         SymbolTable.values.put(className, "");
         SymbolTable.types.put(className, classType);
         SymbolTable.relations.put(className, relation);

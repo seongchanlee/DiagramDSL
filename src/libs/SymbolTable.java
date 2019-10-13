@@ -6,6 +6,7 @@ import java.util.Map;
 import libs.Node;
 
 public class SymbolTable {
+    public static String currentClass;
     public static Map<String, String>            values    = new HashMap<>();
     public static Map<String, String>            types     = new HashMap<>();
     public static Map<String, Node>              relations = new HashMap<>();

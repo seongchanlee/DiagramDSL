@@ -20,8 +20,8 @@ public class KEYWORDS extends STATEMENT {
     @Override
     public String evaluate() {
         String result = "";
-        if(isFinal){ result += "final"; }
-        if(isStatic){ result += "static"; }
+        if(isFinal){ result += "final "; }
+        if(isStatic){ result += "static "; }
         return result;
     }
 }

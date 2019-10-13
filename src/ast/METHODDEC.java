@@ -1,5 +1,7 @@
 package ast;
 
+import libs.SymbolTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -57,6 +59,9 @@ public class METHODDEC extends STATEMENT {
             }
             method += ")";
         }
+        // Add method to current class
+        String activeClass = SymbolTable.currentClass;
+        SymbolTable.methods.get(activeClass).add(method);
         System.out.println(method);
         return method;
     }
