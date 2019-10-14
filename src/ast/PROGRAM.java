@@ -18,11 +18,9 @@ public class PROGRAM extends ASTNode {
     }
 
     @Override
-    public String evaluate() {
+    public void evaluate() {
         for(STATEMENT s: statements){
             s.evaluate();
         }
-        // store or pass output result to renderer
-        return null;
     }
 }

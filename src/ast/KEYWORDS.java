@@ -1,5 +1,7 @@
 package ast;
 
+import libs.ASTNode;
+
 public class KEYWORDS extends STATEMENT {
     private boolean isStatic = false;
     private boolean isFinal = false;
@@ -18,10 +20,13 @@ public class KEYWORDS extends STATEMENT {
     }
 
     @Override
-    public String evaluate() {
-        String result = "";
-        if(isFinal){ result += "final "; }
-        if(isStatic){ result += "static "; }
-        return result;
+    public void evaluate() {
+        if (isStatic) {
+            ASTNode.getMethodObj(ASTNode.getCurrentMethodName()).setStatic();
+        }
+
+        if (isFinal) {
+            ASTNode.getMethodObj(ASTNode.getCurrentMethodName()).setFinal();
+        }
     }
 }
