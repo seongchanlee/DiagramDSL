@@ -46,27 +46,19 @@ public class RELATION extends STATEMENT {
     public String evaluate()
     {
         // check extended or implemented classes exist
-        if(SymbolTable.values.get(extendedClass).equals(null))
+        if(extendedClass != null && !SymbolTable.values.get(extendedClass).equals(null))
         {
-            System.out.println("Extended class has not been declared before");
-            System.exit(1);
+            // build graphviz connections
+            String extendsArrow = "to(" + nodeName + ").with(Arrow.NORMAL.dir(BACK))";
+            SymbolTable.relations.get(extendedClass).add(extendsArrow);
         }
         for(String imClass: implementedClass)
         {
-            if(SymbolTable.values.get(imClass).equals(null))
+            if(imClass != null && !SymbolTable.values.get(imClass).equals(null))
             {
-                System.out.println("Implemented class has not been declared before");
-                System.exit(1);
+                String implementsArrow = "to(" + nodeName + ").with(Arrow.DASHED.dir(BACK)).with(Style.DASHED)";
+                SymbolTable.relations.get(imClass).add(implementsArrow);
             }
-        }
-
-        // build graphviz connections
-        String extendsArrow = "to(" + nodeName + ").with(Arrow.NORMAL.dir(BACK))";
-        SymbolTable.relations.get(extendedClass).add(extendsArrow);
-        for(String imClass: implementedClass)
-        {
-            String implementsArrow = "to(" + nodeName + ").with(Arrow.DASHED.dir(BACK)).with(Style.DASHED)";
-            SymbolTable.relations.get(imClass).add(implementsArrow);
         }
         return null;
     }
