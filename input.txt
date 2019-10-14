@@ -1,5 +1,6 @@
 interface SchedulerInterface
-abstract class Scheduler implements SchedulerInterface
+interface TestInterface
+abstract class Scheduler implements SchedulerInterface, TestInterface
 	public abstract method schedule param type:int
 	public method showPhysicalNetwork
 class ILPScheduler extends Scheduler

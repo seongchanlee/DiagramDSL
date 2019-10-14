@@ -3,6 +3,7 @@ package ast;
 import libs.ASTNode;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class RELATION extends STATEMENT {
@@ -19,14 +20,9 @@ public class RELATION extends STATEMENT {
 
         if (tokenizer.checkToken("implements")) {
             tokenizer.getAndCheckNext("implements");
-            String implementedClass = tokenizer.getNext();
-            implementedClasses.add(implementedClass);
-
-            while (tokenizer.checkToken(",")) {
-                tokenizer.getAndCheckNext(",");
-                implementedClass = tokenizer.getNext();
-                implementedClasses.add(implementedClass);
-            }
+            String implementedClassStrings = tokenizer.getNext();
+            List<String> implementedClassStringList = Arrays.asList(implementedClassStrings.split(","));
+            implementedClasses.addAll(implementedClassStringList);
         }
     }
 
