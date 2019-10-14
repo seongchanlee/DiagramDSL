@@ -7,4 +7,4 @@ class ILPScheduler extends Scheduler
 class HeuristicScheduler extends Scheduler
 	public method scheduleB param type:int, date:DateTime, test:String
 class HybridScheduler extends Scheduler
-	public method scheduleC param type:int
+	public method scheduleC param type:int, test:String

@@ -21,7 +21,7 @@ public class PARAMETERS extends STATEMENT {
 
         List<Parameter> parameters = new ArrayList<>();
 
-        for(int i = 0; i < paramStrings.length - 1; i++) {
+        for(int i = 0; i < paramStrings.length; i++) {
             String[] splitParam = paramStrings[i].split(":");
             Parameter parameter = new Parameter(splitParam[0], splitParam[1]);
             parameters.add(parameter);
