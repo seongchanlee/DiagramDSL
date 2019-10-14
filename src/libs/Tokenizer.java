@@ -69,7 +69,7 @@ public class Tokenizer {
     public String getNext(){
         String token="";
         if (currentToken<tokens.length){
-            token = tokens[currentToken];
+            token = tokens[currentToken].replaceAll("(\\r|\\n)", "");
             currentToken++;
         }
         else
@@ -92,7 +92,7 @@ public class Tokenizer {
             System.exit(0);
         }
 //        System.out.println("matched: "+s+"  to  "+regexp);
-        return s;
+        return s.replaceAll("\\r|\\n", "");
     }
 
     public boolean moreTokens() {
