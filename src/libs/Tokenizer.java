@@ -68,7 +68,7 @@ public class Tokenizer {
 
     public String getNext(){
         String token="";
-        if (currentToken <= tokens.length){
+        if (currentToken < tokens.length){
             token = tokens[currentToken].replaceAll("(\\r|\\n)", "");
             currentToken++;
         }
