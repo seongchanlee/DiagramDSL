@@ -68,7 +68,7 @@ public class GraphDrawer {
 
     public void export() {
         try {
-            Graphviz.fromGraph(graph).height(900).render(Format.PNG).toFile(new File("example/ex1.png"));
+            Graphviz.fromGraph(graph).height(900).render(Format.PNG).toFile(new File("UML/UML Diagram.png"));
         } catch (IOException e) {
             throw new RuntimeException("Export Failed!");
         }

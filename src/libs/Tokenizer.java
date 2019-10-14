@@ -51,7 +51,7 @@ public class Tokenizer {
         System.out.println(tokenizedProgram);
         String[] temparray = tokenizedProgram.split("[_]+");
 
-        tokens = Arrays.copyOfRange(temparray, 1, temparray.length-1);
+        tokens = Arrays.copyOfRange(temparray, 1, temparray.length);
         System.out.println("tokens");
         System.out.println(Arrays.asList(tokens));
     }
@@ -68,7 +68,7 @@ public class Tokenizer {
 
     public String getNext(){
         String token="";
-        if (currentToken<tokens.length){
+        if (currentToken <= tokens.length){
             token = tokens[currentToken].replaceAll("(\\r|\\n)", "");
             currentToken++;
         }
