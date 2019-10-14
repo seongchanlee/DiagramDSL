@@ -3,7 +3,6 @@ package libs;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-import libs.Node;
 
 public class SymbolTable {
     public static String currentClass;

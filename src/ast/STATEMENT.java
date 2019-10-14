@@ -1,8 +1,8 @@
 package ast;
 
-import libs.Node;
+import libs.ASTNode;
 
-public abstract class STATEMENT extends Node {
+public abstract class STATEMENT extends ASTNode {
     protected static STATEMENT getSubStatement() {
         if (tokenizer.checkToken("class") || tokenizer.checkToken("abstract")
                 || tokenizer.checkToken("interface")) {
