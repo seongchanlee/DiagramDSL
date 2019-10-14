@@ -1,5 +1,7 @@
 package ast;
 
+import libs.ASTNode;
+
 public class MODIFIER extends STATEMENT {
     private String modifier;
 
@@ -9,17 +11,7 @@ public class MODIFIER extends STATEMENT {
     }
 
     @Override
-    public String evaluate() {
-        if(modifier.equals("public")){
-            return "+";
-        }
-        if(modifier.equals("private")){
-            return "-";
-        }
-        if(modifier.equals("protected")){
-            return "#";
-        }
-        // use public modifier as the default value
-        return "+";
+    public void evaluate() {
+        ASTNode.getMethodObj(ASTNode.getCurrentMethodName()).setModifier(modifier);
     }
 }

@@ -1,17 +1,17 @@
 package ast;
-import libs.SymbolTable;
 
-import java.util.ArrayList;
+import libs.ASTNode;
+import model.Class;
 
 public class CLASSDEC extends STATEMENT {
     private String className;
     private String classType;
-    private RELATION relation = null;
+    private RELATION relation;
 
     @Override
     public void parse() {
         if (tokenizer.checkToken("class")) {
-            classType = "";
+            classType = "regular";
             tokenizer.getAndCheckNext("class");
             className = tokenizer.getNext();
             if (tokenizer.checkToken("extends") || tokenizer.checkToken("implements")) {
@@ -21,7 +21,7 @@ public class CLASSDEC extends STATEMENT {
         }
 
         if (tokenizer.checkToken("abstract")) {
-            classType = "\\<\\<Abstract\\>\\>";
+            classType = "abstract";
             tokenizer.getAndCheckNext("abstract");
             tokenizer.getAndCheckNext("class");
             className = tokenizer.getNext();
@@ -32,27 +32,20 @@ public class CLASSDEC extends STATEMENT {
         }
 
         if (tokenizer.checkToken("interface")) {
-            classType = "\\<\\<Interface\\>\\>";
+            classType = "interface";
             tokenizer.getAndCheckNext("interface");
             className = tokenizer.getNext();
         }
-
-        SymbolTable.currentClass = className;
-        ArrayList methods = new ArrayList<String>();
-        SymbolTable.methods.put(className, methods);
     }
 
     @Override
-    public String evaluate() {
-        SymbolTable.currentClass = className;
-        SymbolTable.values.put(className, "");
-        SymbolTable.types.put(className, classType);
+    public void evaluate() {
+        ASTNode.setCurrentClassName(className);
+        Class evaluatedClass = new Class(className, classType);
+        ASTNode.addClass(evaluatedClass);
 
-        if(relation != null)
-        {
-            relation.setClassName(className);
+        if(relation != null) {
             relation.evaluate();
         }
-        return null;
     }
 }

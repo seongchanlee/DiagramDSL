@@ -1,15 +1,14 @@
 package ast;
 
-import libs.SymbolTable;
-
-import java.util.ArrayList;
-import java.util.List;
+import libs.ASTNode;
+import model.Method;
 
 public class METHODDEC extends STATEMENT {
     private String methodName;
-    private String methodType;
+    private boolean isAbstract;
     private MODIFIER modifier;
-    private List<PARAMETER> parameters = new ArrayList<>();
+    private KEYWORDS keywords;
+    private PARAMETERS parameters;
 
     @Override
     public void parse() {
@@ -17,52 +16,39 @@ public class METHODDEC extends STATEMENT {
         modifier.parse();
 
         if (tokenizer.checkToken("static") || tokenizer.checkToken("final")) {
-            KEYWORDS keywords = new KEYWORDS();
+            keywords = new KEYWORDS();
             keywords.parse();
         }
 
         if (tokenizer.checkToken("abstract")) {
-            methodType = tokenizer.getNext();
+            tokenizer.getAndCheckNext("abstract");
+            isAbstract = true;
         } else {
-            methodType = "regular";
+            isAbstract = false;
         }
 
         tokenizer.getAndCheckNext("method");
         methodName = tokenizer.getNext();
 
-        while (tokenizer.checkToken("param")) {
-            tokenizer.getAndCheckNext("param");
-            PARAMETER parameter = new PARAMETER();
-            parameter.parse();
-            parameters.add(parameter);
+        if (tokenizer.checkToken("param")) {
+            parameters = new PARAMETERS();
+            parameters.parse();
         }
     }
 
     @Override
-    public String evaluate() {
-        String method = "";
-        String modifierString = modifier.evaluate();
-        String type = methodType.equals("regular") ? " " : " " + methodType + " ";
-        method += modifierString + type + methodName;
-        if(parameters.isEmpty())
-        {
-            method += "()";
+    public void evaluate() {
+        ASTNode.setCurrentMethodName(methodName);
+        Method evaluatedMethod = new Method(methodName, isAbstract);
+        ASTNode.addMethod(evaluatedMethod);
+        ASTNode.getClassObj(ASTNode.getCurrentClassName()).addMethod(evaluatedMethod);
+
+        modifier.evaluate();
+        if (keywords != null) {
+            keywords.evaluate();
         }
-        else
-        {
-            int count = 0;
-            method += "(";
-            for(PARAMETER p: parameters)
-            {
-                if(count != 0){ method += ", "; }
-                method += p.evaluate();
-                count++;
-            }
-            method += ")";
+        if (parameters != null) {
+            parameters.evaluate();
         }
-        // Add method to current class
-        String activeClass = SymbolTable.currentClass;
-        SymbolTable.methods.get(activeClass).add(method);
-        return method;
     }
 }

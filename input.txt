@@ -1,9 +1,10 @@
-abstract class Scheduler
-	public abstract method schedule param vmRequest
+interface SchedulerInterface
+abstract class Scheduler implements SchedulerInterface
+	public abstract method schedule param type:int
 	public method showPhysicalNetwork
 class ILPScheduler extends Scheduler
-	public method scheduleA param vmRequest param time param date
+	public method scheduleA param type:int, date:DateTime
 class HeuristicScheduler extends Scheduler
-	public method scheduleB param vmRequest
+	public method scheduleB param type:int, date:DateTime, test:String
 class HybridScheduler extends Scheduler
-	public method scheduleC param vmRequest
+	public method scheduleC param type:int
