@@ -20,15 +20,13 @@ public class Test {
 
     public static void main(String[] args){
 
-        Node node0 = node("node0").with(Records.of("{ \\<\\<abstract\\>\\>\nTeacher| teach();}"));
-        Node node1 = node("node1").with(Records.of(rec("BiologyTeacher")));
-        Node node2 = node("node2").with(Records.of(rec("PhysicsTeacher")));
+        Node ILPScheduler = node("ILPScheduler").with(Records.of("{ILPScheduler| - scheduleA(vmRequest, time, date);}"));
+        Node HeuristicScheduler = node("HeuristicScheduler").with(Records.of("{HeuristicScheduler| # scheduleB(vmRequest);}"));
+        Node Scheduler = node("Scheduler").with(Records.of("{\\<\\<Abstract\\>\\>\nScheduler| + abstract schedule(vmRequest);| + showPhysicalNetwork();}"));
+        Node HybridScheduler = node("HybridScheduler").with(Records.of("{HybridScheduler| + scheduleC;}"));
 
-        Graph g = graph("example1").directed()
-                .graphAttr().with(dir(TOP_TO_BOTTOM)).with(
-                        node0.link(
-                                to(node1).with(Arrow.NORMAL.dir(BACK)),
-                                to(node2).with(Arrow.NORMAL.dir(BACK))));
+        Graph g = graph("example1").directed().graphAttr().with(dir(TOP_TO_BOTTOM)).with(HeuristicScheduler.link(to(HybridScheduler).with(Arrow.NORMAL.dir(BACK))),Scheduler.link(to(ILPScheduler).with(Arrow.NORMAL.dir(BACK)),to(HeuristicScheduler).with(Arrow.NORMAL.dir(BACK))));
+
         try {
             Graphviz.fromGraph(g).height(900).render(Format.PNG).toFile(new File("example/ex1.png"));
         } catch (IOException e) {

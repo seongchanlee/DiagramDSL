@@ -33,6 +33,7 @@ public class Main {
         program.evaluate();
 
         // Build UML diagram
+        String nodeDecl = "";
         Map<String, Node> nodes = new HashMap<>();
         Iterator classes = SymbolTable.values.entrySet().iterator();
         while (classes.hasNext())
@@ -47,31 +48,47 @@ public class Main {
                 record += "| " + method + ";";
             }
             record += "}";
+            nodeDecl += "Node " + className + " = " + "node(\"" + className + "\").with(Records.of(\"" + record + "\"));\n";
             nodes.put(className, node(className).with(Records.of(record)));
         }
 
         // create links between nodes
+        String output = "";
         Iterator relations = SymbolTable.relations.entrySet().iterator();
+        int connectionCount = 0;
         while (relations.hasNext()){
             String connection = "";
             Map.Entry pair = (Map.Entry)relations.next();
             String className = (String) pair.getKey();
             ArrayList<String> links = SymbolTable.relations.get(className);
-            int count = 0;
+            int linkCount = 0;
             if (links != null){
                 connection += className + ".link(";
                 for (String link : links){
-                    if(count == 0){
+                    if(linkCount == 0){
                         connection += link;
                     }
-                    else{
+                    else
+                    {
                         connection += "," + link;
                     }
-                    count++;
+                    linkCount++;
                 }
                 connection += ")";
-                System.out.println(connection);
+                if(connectionCount == 0)
+                {
+                    output += connection;
+                }
+                else
+                {
+                    output += "," + connection;
+                }
+                connectionCount++;
             }
         }
+
+        String uml = nodeDecl + "\n" + "Graph g = graph(\"example1\").directed().graphAttr()" +
+                      ".with(dir(TOP_TO_BOTTOM)).with(" + output + ");";
+        System.out.println(uml);
     }
 }
