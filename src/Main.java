@@ -3,8 +3,7 @@ import libs.ASTNode;
 import libs.Tokenizer;
 import libs.SymbolTable;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,8 +33,45 @@ public class Main {
         program.evaluate();
 
         // Build UML diagram
+        Map<String, Node> nodes = new HashMap<>();
+        Iterator classes = SymbolTable.values.entrySet().iterator();
+        while (classes.hasNext())
+        {
+            // create boxes for each class
+            Map.Entry pair = (Map.Entry)classes.next();
+            String className = (String) pair.getKey();
+            String classType = SymbolTable.types.get(className);
+            ArrayList<String> methods = SymbolTable.methods.get(className);
+            String record = "{" + (!classType.equals("") ? (classType + "\n") : "") + className;
+            for (String method : methods){
+                record += "| " + method + ";";
+            }
+            record += "}";
+            nodes.put(className, node(className).with(Records.of(record)));
+        }
 
-
-
+        // create links between nodes
+        Iterator relations = SymbolTable.relations.entrySet().iterator();
+        while (relations.hasNext()){
+            String connection = "";
+            Map.Entry pair = (Map.Entry)relations.next();
+            String className = (String) pair.getKey();
+            ArrayList<String> links = SymbolTable.relations.get(className);
+            int count = 0;
+            if (links != null){
+                connection += className + ".link(";
+                for (String link : links){
+                    if(count == 0){
+                        connection += link;
+                    }
+                    else{
+                        connection += "," + link;
+                    }
+                    count++;
+                }
+                connection += ")";
+                System.out.println(connection);
+            }
+        }
     }
 }

@@ -11,7 +11,7 @@ public class CLASSDEC extends STATEMENT {
     @Override
     public void parse() {
         if (tokenizer.checkToken("class")) {
-            classType = "regular";
+            classType = "";
             tokenizer.getAndCheckNext("class");
             className = tokenizer.getNext();
             if (tokenizer.checkToken("extends") || tokenizer.checkToken("implements")) {
@@ -21,7 +21,7 @@ public class CLASSDEC extends STATEMENT {
         }
 
         if (tokenizer.checkToken("abstract")) {
-            classType = "abstract";
+            classType = "\\<\\<Abstract\\>\\>";
             tokenizer.getAndCheckNext("abstract");
             tokenizer.getAndCheckNext("class");
             className = tokenizer.getNext();
@@ -32,7 +32,7 @@ public class CLASSDEC extends STATEMENT {
         }
 
         if (tokenizer.checkToken("interface")) {
-            classType = "interface";
+            classType = "\\<\\<Interface\\>\\>";
             tokenizer.getAndCheckNext("interface");
             className = tokenizer.getNext();
         }
