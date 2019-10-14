@@ -109,7 +109,7 @@ public class GraphDrawer {
                 sb.append(param.getName()).append(": ").append(param.getType());
                 paramStrings.add(sb.toString());
             }
-            String finalParamString = String.join(",", paramStrings);
+            String finalParamString = String.join(", ", paramStrings);
 
             stringBuilder.append('(')
                     .append(finalParamString)
