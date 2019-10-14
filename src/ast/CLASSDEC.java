@@ -1,10 +1,12 @@
 package ast;
 import libs.SymbolTable;
 
+import java.util.ArrayList;
+
 public class CLASSDEC extends STATEMENT {
     private String className;
     private String classType;
-    private RELATION relation;
+    private RELATION relation = null;
 
     @Override
     public void parse() {
@@ -34,14 +36,22 @@ public class CLASSDEC extends STATEMENT {
             tokenizer.getAndCheckNext("interface");
             className = tokenizer.getNext();
         }
+
+        SymbolTable.currentClass = className;
+        ArrayList methods = new ArrayList<String>();
+        SymbolTable.methods.put(className, methods);
     }
 
     @Override
     public String evaluate() {
-        SymbolTable.currentClass = className;
         SymbolTable.values.put(className, "");
         SymbolTable.types.put(className, classType);
-        SymbolTable.relations.put(className, relation);
+
+        if(relation != null)
+        {
+            relation.setClassName(className);
+            relation.evaluate();
+        }
         return null;
     }
 }

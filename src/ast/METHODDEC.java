@@ -29,6 +29,8 @@ public class METHODDEC extends STATEMENT {
 
         tokenizer.getAndCheckNext("method");
         methodName = tokenizer.getNext();
+        SymbolTable.methods.get(SymbolTable.currentClass).add(methodName);
+
         while (tokenizer.checkToken("param")) {
             tokenizer.getAndCheckNext("param");
             PARAMETER parameter = new PARAMETER();
