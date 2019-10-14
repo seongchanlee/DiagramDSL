@@ -13,7 +13,7 @@ public class METHODDEC extends STATEMENT {
 
     @Override
     public void parse() {
-        MODIFIER modifier = new MODIFIER();
+        modifier = new MODIFIER();
         modifier.parse();
 
         if (tokenizer.checkToken("static") || tokenizer.checkToken("final")) {
@@ -43,8 +43,8 @@ public class METHODDEC extends STATEMENT {
     public String evaluate() {
         String method = "";
         String modifierString = modifier.evaluate();
-        String type = methodType.equals("regular") ? "" : methodType;
-        method += modifierString + " " + type + " " + methodName;
+        String type = methodType.equals("regular") ? " " : " " + methodType + " ";
+        method += modifierString + type + methodName;
         if(parameters.isEmpty())
         {
             method += "()";

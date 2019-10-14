@@ -22,6 +22,7 @@ public class PROGRAM extends Node {
         for(STATEMENT s: statements){
             s.evaluate();
         }
+        // store or pass output result to renderer
         return null;
     }
 }

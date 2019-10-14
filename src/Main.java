@@ -11,5 +11,6 @@ public class Main {
         Tokenizer.makeTokenizer("input.txt",literals);
         Node program = new PROGRAM();
         program.parse();
+        program.evaluate();
     }
 }
