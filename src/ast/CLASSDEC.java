@@ -1,14 +1,17 @@
 package ast;
+import libs.SymbolTable;
+
+import java.util.ArrayList;
 
 public class CLASSDEC extends STATEMENT {
     private String className;
     private String classType;
-    private RELATION relation;
+    private RELATION relation = null;
 
     @Override
     public void parse() {
         if (tokenizer.checkToken("class")) {
-            classType = "regular";
+            classType = "";
             tokenizer.getAndCheckNext("class");
             className = tokenizer.getNext();
             if (tokenizer.checkToken("extends") || tokenizer.checkToken("implements")) {
@@ -18,7 +21,7 @@ public class CLASSDEC extends STATEMENT {
         }
 
         if (tokenizer.checkToken("abstract")) {
-            classType = "abstract";
+            classType = "\\<\\<Abstract\\>\\>";
             tokenizer.getAndCheckNext("abstract");
             tokenizer.getAndCheckNext("class");
             className = tokenizer.getNext();
@@ -29,18 +32,27 @@ public class CLASSDEC extends STATEMENT {
         }
 
         if (tokenizer.checkToken("interface")) {
-            classType = "interface";
+            classType = "\\<\\<Interface\\>\\>";
             tokenizer.getAndCheckNext("interface");
             className = tokenizer.getNext();
         }
+
+        SymbolTable.currentClass = className;
+        ArrayList methods = new ArrayList<String>();
+        SymbolTable.methods.put(className, methods);
     }
 
     @Override
     public String evaluate() {
-        return null;
-    }
+        SymbolTable.currentClass = className;
+        SymbolTable.values.put(className, "");
+        SymbolTable.types.put(className, classType);
 
-    public String getClassType() {
-        return classType;
+        if(relation != null)
+        {
+            relation.setClassName(className);
+            relation.evaluate();
+        }
+        return null;
     }
 }

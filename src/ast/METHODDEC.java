@@ -1,17 +1,19 @@
 package ast;
 
+import libs.SymbolTable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class METHODDEC extends STATEMENT {
     private String methodName;
     private String methodType;
-    private String modifier;
+    private MODIFIER modifier;
     private List<PARAMETER> parameters = new ArrayList<>();
 
     @Override
     public void parse() {
-        MODIFIER modifier = new MODIFIER();
+        modifier = new MODIFIER();
         modifier.parse();
 
         if (tokenizer.checkToken("static") || tokenizer.checkToken("final")) {
@@ -27,6 +29,7 @@ public class METHODDEC extends STATEMENT {
 
         tokenizer.getAndCheckNext("method");
         methodName = tokenizer.getNext();
+
         while (tokenizer.checkToken("param")) {
             tokenizer.getAndCheckNext("param");
             PARAMETER parameter = new PARAMETER();
@@ -37,6 +40,29 @@ public class METHODDEC extends STATEMENT {
 
     @Override
     public String evaluate() {
-        return null;
+        String method = "";
+        String modifierString = modifier.evaluate();
+        String type = methodType.equals("regular") ? " " : " " + methodType + " ";
+        method += modifierString + type + methodName;
+        if(parameters.isEmpty())
+        {
+            method += "()";
+        }
+        else
+        {
+            int count = 0;
+            method += "(";
+            for(PARAMETER p: parameters)
+            {
+                if(count != 0){ method += ", "; }
+                method += p.evaluate();
+                count++;
+            }
+            method += ")";
+        }
+        // Add method to current class
+        String activeClass = SymbolTable.currentClass;
+        SymbolTable.methods.get(activeClass).add(method);
+        return method;
     }
 }

@@ -2,8 +2,8 @@ abstract class Scheduler
 	public abstract method schedule param vmRequest
 	public method showPhysicalNetwork
 class ILPScheduler extends Scheduler
-	public method schedule param vmRequest param time param date
+	public method scheduleA param vmRequest param time param date
 class HeuristicScheduler extends Scheduler
-	public method schedule param vmRequest
+	public method scheduleB param vmRequest
 class HybridScheduler extends Scheduler
-	public method schedule param vmRequest
+	public method scheduleC param vmRequest

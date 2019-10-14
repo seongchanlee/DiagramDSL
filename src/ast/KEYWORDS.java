@@ -19,6 +19,9 @@ public class KEYWORDS extends STATEMENT {
 
     @Override
     public String evaluate() {
-        return null;
+        String result = "";
+        if(isFinal){ result += "final "; }
+        if(isStatic){ result += "static "; }
+        return result;
     }
 }

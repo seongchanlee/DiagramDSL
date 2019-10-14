@@ -1,11 +1,11 @@
 package ast;
 
-import libs.Node;
+import libs.ASTNode;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PROGRAM extends Node {
+public class PROGRAM extends ASTNode {
     private List<STATEMENT> statements = new ArrayList<>();
 
     @Override
@@ -19,6 +19,10 @@ public class PROGRAM extends Node {
 
     @Override
     public String evaluate() {
+        for(STATEMENT s: statements){
+            s.evaluate();
+        }
+        // store or pass output result to renderer
         return null;
     }
 }
