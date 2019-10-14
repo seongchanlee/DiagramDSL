@@ -3,9 +3,6 @@ package libs;
 import model.Class;
 import model.Method;
 
-import java.io.FileNotFoundException;
-import java.io.PrintWriter;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -13,14 +10,6 @@ import java.util.Map;
 
 public abstract class ASTNode {
     protected static Tokenizer tokenizer = Tokenizer.getTokenizer();
-    static protected PrintWriter writer;
-    public static void setWriter(String name) throws FileNotFoundException, UnsupportedEncodingException {
-        writer = new PrintWriter(name, "UTF-8");
-    }
-    public static void closeWriter(){
-        writer.close();
-    }
-
     private static Map<String, Class> evaluatedClasses = new HashMap<>();
     private static Map<String, Method> evaluatedMethods = new HashMap<>();
     private static String currentClassName;
