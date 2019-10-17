@@ -1,6 +1,6 @@
-package ast;
+package com.seongchanlee.DiagramDSL.ast;
 
-import libs.ASTNode;
+import com.seongchanlee.DiagramDSL.libs.ASTNode;
 
 public class MODIFIER extends STATEMENT {
     private String modifier;

@@ -1,6 +1,6 @@
-package ast;
+package com.seongchanlee.DiagramDSL.ast;
 
-import libs.ASTNode;
+import com.seongchanlee.DiagramDSL.libs.ASTNode;
 
 import java.util.ArrayList;
 import java.util.Arrays;

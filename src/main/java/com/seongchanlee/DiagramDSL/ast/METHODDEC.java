@@ -1,7 +1,7 @@
-package ast;
+package com.seongchanlee.DiagramDSL.ast;
 
-import libs.ASTNode;
-import model.Method;
+import com.seongchanlee.DiagramDSL.libs.ASTNode;
+import com.seongchanlee.DiagramDSL.model.Method;
 
 public class METHODDEC extends STATEMENT {
     private String methodName;

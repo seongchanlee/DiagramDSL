@@ -1,4 +1,4 @@
-package util;
+package com.seongchanlee.DiagramDSL.util;
 
 import guru.nidi.graphviz.attribute.Arrow;
 import guru.nidi.graphviz.attribute.Rank;
@@ -7,10 +7,10 @@ import guru.nidi.graphviz.attribute.Style;
 import guru.nidi.graphviz.engine.Format;
 import guru.nidi.graphviz.engine.Graphviz;
 import guru.nidi.graphviz.model.MutableGraph;
-import libs.ASTNode;
-import model.Class;
-import model.Method;
-import model.Parameter;
+import com.seongchanlee.DiagramDSL.libs.ASTNode;
+import com.seongchanlee.DiagramDSL.model.Class;
+import com.seongchanlee.DiagramDSL.model.Method;
+import com.seongchanlee.DiagramDSL.model.Parameter;
 
 import java.io.File;
 import java.io.IOException;

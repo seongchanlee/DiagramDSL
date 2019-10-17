@@ -1,4 +1,4 @@
-package libs;
+package com.seongchanlee.DiagramDSL.libs;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -40,20 +40,14 @@ public class Tokenizer {
         tokenizedProgram = tokenizedProgram.replace("\n","");
         tokenizedProgram = tokenizedProgram.replace("\t","");
         tokenizedProgram = tokenizedProgram.replaceAll("([0-9]+)","_$1_");
-        System.out.println(program);
 
         for (String s : literals){
             tokenizedProgram = tokenizedProgram.replace(s,"_"+s+"_");
-//            System.out.println(tokenizedProgram);
         }
         tokenizedProgram = tokenizedProgram.replaceAll("[ ]+","");
-        System.out.println("tokenizedprogram");
-        System.out.println(tokenizedProgram);
         String[] temparray = tokenizedProgram.split("[_]+");
 
         tokens = Arrays.copyOfRange(temparray, 1, temparray.length);
-        System.out.println("tokens");
-        System.out.println(Arrays.asList(tokens));
     }
 
     private String checkNext(){
@@ -80,7 +74,6 @@ public class Tokenizer {
 
     public boolean checkToken(String regexp){
         String s = checkNext();
-//        System.out.println("comparing: |"+s+"|  to  |"+regexp+"|");
         return (s.matches(regexp));
     }
 
@@ -91,7 +84,6 @@ public class Tokenizer {
             System.out.println("FAILED!!!!  on "+ regexp);
             System.exit(0);
         }
-//        System.out.println("matched: "+s+"  to  "+regexp);
         return s.replaceAll("\\r|\\n", "");
     }
 
