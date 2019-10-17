@@ -1,7 +1,7 @@
-package ast;
+package com.seongchanlee.DiagramDSL.ast;
 
-import libs.ASTNode;
-import model.Class;
+import com.seongchanlee.DiagramDSL.libs.ASTNode;
+import com.seongchanlee.DiagramDSL.model.Class;
 
 public class CLASSDEC extends STATEMENT {
     private String className;

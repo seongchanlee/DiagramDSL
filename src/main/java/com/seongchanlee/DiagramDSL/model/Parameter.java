@@ -1,4 +1,4 @@
-package model;
+package com.seongchanlee.DiagramDSL.model;
 
 public class Parameter {
     private String name;

@@ -1,7 +1,7 @@
-package libs;
+package com.seongchanlee.DiagramDSL.libs;
 
-import model.Class;
-import model.Method;
+import com.seongchanlee.DiagramDSL.model.Class;
+import com.seongchanlee.DiagramDSL.model.Method;
 
 import java.util.ArrayList;
 import java.util.HashMap;
