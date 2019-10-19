@@ -1,5 +1,18 @@
-# CPSC 410 DSL
-Project repo for CPSC 410 DSL project
+# DiagramDSL
+DSL that allows you to easily create diagrams (just class diagrams for now).
 
-* [Link to UML DSL Google Doc](https://docs.google.com/document/d/152dtjcd9RQW5e46Po19uDmLAFWZd9vb8A700snHujUY/edit?usp=sharing)
-* [Link to Markdown DSL Google Doc](https://docs.google.com/document/d/1LfASOBqnAJO28GxQ4_fSaG_97dF-YKVYXa6dd9IN5Nc/edit?usp=sharing)
+## Grammar
+
+**PROGRAM** : : = [STATEMENT]*  
+**STATEMENT** : : =  [CLASSDEC METHODDEC*]+  
+**CLASSDEC** : : = [class | abstract class | interface]? “class” CLASSNAME [RELATION]?  
+**RELATION** : : = [extends CLASSNAME | implements [CLASSNAME] [“,” CLASSNAME]*]   
+**METHODDEC** : : = MODIFIER [KEYWORDS]? “method” METHODNAME [PARAMETER]*  
+**MODIFIER** : : = [public | private | protected]?  
+**KEYWORDS** : : = [STATIC]? [FINAL]?  
+**PARAMETER** : : = [“param” PARAMETERNAME]*  
+**CLASSNAME**, **METHODNAME**, **PARAMETERNAME** : : = [a-zA-Z]+
+
+## TODO
+* Add class variable support
+* Add support for other type of diagrams (e.g., sequence, etc.)
