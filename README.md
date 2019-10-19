@@ -5,8 +5,8 @@ DSL that allows you to easily create diagrams (just class diagrams for now).
 
 **PROGRAM** : : = [STATEMENT]*  
 **STATEMENT** : : =  [CLASSDEC METHODDEC*]+  
-**CLASSDEC** : : = [class | abstract class | interface]? “class” CLASSNAME [RELATION]?  
-**RELATION** : : = [extends CLASSNAME | implements [CLASSNAME] [“,” CLASSNAME]*]   
+**CLASSDEC** : : = [class | abstract class | interface]? CLASSNAME [RELATION]?  
+**RELATION** : : = [extends CLASSNAME | implements [CLASSNAME] [“,” CLASSNAME]\*]   
 **METHODDEC** : : = MODIFIER [KEYWORDS]? “method” METHODNAME [PARAMETER]*  
 **MODIFIER** : : = [public | private | protected]?  
 **KEYWORDS** : : = [STATIC]? [FINAL]?  
